@@ -75,44 +75,20 @@ export const App: React.FC = () => {
 
   function allSelected(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    const { target } = event;
 
     setFilter(Filter.all);
-
-    if (target instanceof HTMLAnchorElement) {
-      target.classList.add('selected');
-    }
   }
 
   function activeSelected(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    const { target } = event;
 
     setFilter(Filter.active);
-
-    if (target instanceof HTMLAnchorElement) {
-      target.classList.add('selected');
-    }
   }
 
   function completedSelected(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    const { target } = event;
 
     setFilter(Filter.completed);
-
-    if (target instanceof HTMLAnchorElement) {
-      target.classList.add('selected');
-    }
-  }
-
-  function removeSelected(event: React.FocusEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    const { target } = event;
-
-    if (target instanceof HTMLAnchorElement) {
-      target.classList.remove('selected');
-    }
   }
 
   if (!USER_ID) {
@@ -133,7 +109,6 @@ export const App: React.FC = () => {
             counter={counter}
             filter={filter}
             allSelected={allSelected}
-            removeSelected={removeSelected}
             activeSelected={activeSelected}
             completedSelected={completedSelected}
           />

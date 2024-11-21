@@ -7,18 +7,10 @@ interface Props {
   allSelected: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   activeSelected: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   completedSelected: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-  removeSelected: (event: React.FocusEvent<HTMLAnchorElement>) => void;
 }
 
 export const Footer: React.FC<Props> = React.memo(
-  ({
-    counter,
-    filter,
-    allSelected,
-    activeSelected,
-    completedSelected,
-    removeSelected,
-  }) => {
+  ({ counter, filter, allSelected, activeSelected, completedSelected }) => {
     return (
       <footer className="todoapp__footer" data-cy="Footer">
         <span className="todo-count" data-cy="TodosCounter">
@@ -33,27 +25,28 @@ export const Footer: React.FC<Props> = React.memo(
             })}
             data-cy="FilterLinkAll"
             onClick={allSelected}
-            onBlur={removeSelected}
           >
             All
           </a>
 
           <a
             href="#/active"
-            className="filter__link"
+            className={classNames('filter__link', {
+              selected: filter === 'Active',
+            })}
             data-cy="FilterLinkActive"
             onClick={activeSelected}
-            onBlur={removeSelected}
           >
             Active
           </a>
 
           <a
             href="#/completed"
-            className="filter__link"
+            className={classNames('filter__link', {
+              selected: filter === 'Completed',
+            })}
             data-cy="FilterLinkCompleted"
             onClick={completedSelected}
-            onBlur={removeSelected}
           >
             Completed
           </a>
