@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 interface Props {
-  counter: number;
+  nrOfActiveTodos: number;
   filter: string;
   allSelected: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   activeSelected: (event: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -10,11 +10,17 @@ interface Props {
 }
 
 export const Footer: React.FC<Props> = React.memo(
-  ({ counter, filter, allSelected, activeSelected, completedSelected }) => {
+  ({
+    nrOfActiveTodos,
+    filter,
+    allSelected,
+    activeSelected,
+    completedSelected,
+  }) => {
     return (
       <footer className="todoapp__footer" data-cy="Footer">
         <span className="todo-count" data-cy="TodosCounter">
-          {counter} items left
+          {nrOfActiveTodos} items left
         </span>
 
         <nav className="filter" data-cy="Filter">

@@ -18,7 +18,6 @@ enum Filter {
 export const App: React.FC = () => {
   const [value, setValue] = useState<string>('');
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [counter, setCounter] = useState<number>(0);
   const [filter, setFilter] = useState<string>(Filter.all);
   const filteredTodos = useMemo(() => {
     return todos.filter(todo => {
@@ -49,19 +48,7 @@ export const App: React.FC = () => {
     }, 100);
   }, []);
 
-  useEffect(() => {
-    let counterOfActive: number = 0;
-
-    if (todos.length > 0) {
-      todos.forEach(todo => {
-        if (!todo.completed) {
-          counterOfActive++;
-        }
-      });
-    }
-
-    setCounter(counterOfActive);
-  }, [todos]);
+  const nrOfActiveTodos = todos.filter(t => !t.completed).length;
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -106,7 +93,7 @@ export const App: React.FC = () => {
         {/* Hide the footer if there are no todos */}
         {todos.length > 0 && (
           <Footer
-            counter={counter}
+            nrOfActiveTodos={nrOfActiveTodos}
             filter={filter}
             allSelected={allSelected}
             activeSelected={activeSelected}
